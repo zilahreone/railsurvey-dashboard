@@ -1,0 +1,318 @@
+{
+  "areas": [
+    {
+      "key": "สายเหนือ",
+      "value": "north",
+      "zones": [
+        {
+          "key": "แขวงบำรุงทางเด่นชัย",
+          "value": "denChai",
+          "stations": [
+            {
+              "key": "ปางต้นผึ้ง (Pang Ton Phung)",
+              "value": "pangTonPhung"
+            },
+            {
+              "key": "เขาพลึง (Khao Phlung)",
+              "value": "khaoPhlung"
+            },
+            {
+              "key": "ห้วยไร่ (Huai Rai)",
+              "value": "huaiRai"
+            },
+            {
+              "key": "ไร่เกล็ดดาว (Rai Kred Dao)",
+              "value": "raiKredDao"
+            },
+            {
+              "key": "แม่พวก (Mae Phuak)",
+              "value": "maePhuak"
+            },
+            {
+              "key": "เด่นชัย (Den Chai)",
+              "value": "denChai"
+            },
+            {
+              "key": "ปากปาน (Pak Pan)",
+              "value": "pakPan"
+            },
+            {
+              "key": "แก่งหลวง (Kaeng Luang)",
+              "value": "kaengLuang"
+            },
+            {
+              "key": "ห้วยแม่ต้า (Huai Mae Ta)",
+              "value": "huaiMaeTa"
+            },
+            {
+              "key": "บ้านปิน (Ban Pin)",
+              "value": "banPin"
+            },
+            {
+              "key": "ผาคัน (Pha Khan)",
+              "value": "phaKhan"
+            },
+            {
+              "key": "ผาคอ (Pha Kho)",
+              "value": "phaKho"
+            }
+          ]
+        },
+        {
+          "key": "แขวงบำรุงทางลำปาง",
+          "value": "lampang",
+          "stations": [
+            {
+              "key": "ปางป๋วย (Pang Puai)",
+              "value": "pangPuai"
+            },
+            {
+              "key": "แม่จาง (Mae Chang)",
+              "value": "maeChang"
+            },
+            {
+              "key": "แม่เมาะ (Mae Mo)",
+              "value": "maeMo"
+            },
+            {
+              "key": "ห้วยรากไม้ (Huai Rak Mai)",
+              "value": "huaiRakMai"
+            },
+            {
+              "key": "ศาลาผาลาด (Sala Pha Lat)",
+              "value": "salaPhaLat"
+            },
+            {
+              "key": "แม่ทะ (Mae Tha)",
+              "value": "maeTha"
+            },
+            {
+              "key": "หนองวัวเฒ่า (Nong Wua Thao)",
+              "value": "nongWuaThao"
+            },
+            {
+              "key": "นครลำปาง (Nakhon Lampang)",
+              "value": "nakhonLampang"
+            },
+            {
+              "key": "ห้างฉัตร (Hang Chat)",
+              "value": "hangChat"
+            },
+            {
+              "key": "ปางม่วง (Pang Muang)",
+              "value": "pangMuang"
+            },
+            {
+              "key": "ห้วยเรียน (Huai Rian)",
+              "value": "huaiRian"
+            }
+          ]
+        },
+        {
+          "key": "แขวงบำรุงทางลำพูน",
+          "value": "lamPhun",
+          "stations": [
+            {
+              "key": "แม่ตานน้อย (Mae Tan Noi)",
+              "value": "maeTanNoi"
+            },
+            {
+              "key": "ขุนตาน (Khun Tan)",
+              "value": "khunTan"
+            },
+            {
+              "key": "ทาชมภู (Tha Chomphu)",
+              "value": "thaChomphu"
+            },
+            {
+              "key": "ศาลาแม่ทา (Sala Mae Tha)",
+              "value": "salaMaeTha"
+            },
+            {
+              "key": "หนองหล่ม (Nong Lom)",
+              "value": "nongLom"
+            },
+            {
+              "key": "ลำพูน (Lam Phun)",
+              "value": "lamPhun"
+            },
+            {
+              "key": "ป่าเส้า (Pa Sao)",
+              "value": "paSao"
+            },
+            {
+              "key": "สารภี (Saraphi)",
+              "value": "saraphi"
+            },
+            {
+              "key": "เชียงใหม่ (Chiang Mai)",
+              "value": "chiangMai"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "สายตะวันออกเฉียงเหนือ",
+      "value": "northEast",
+      "zones": []
+    },
+    {
+      "key": "สายใต้",
+      "value": "south",
+      "zones": []
+    },
+    {
+      "key": "สายตะวันออก",
+      "value": "east",
+      "zones": []
+    },
+    {
+      "key": "สายแม่กลอง",
+      "value": "maeklong",
+      "zones": []
+    }
+  ],
+  "station": [
+    {
+      "key": "ศิลาอาสน์ (Sila At)",
+      "value": "silaAt"
+    },
+    {
+      "key": "ท่าเสา (Tha Sao)",
+      "value": "thaSao"
+    },
+    {
+      "key": "บ้านด่าน (Ban Dan)",
+      "value": "banDan"
+    },
+    {
+      "key": "ปางต้นผึ้ง (Pang Ton Phung)",
+      "value": "pangTonPhung"
+    },
+    {
+      "key": "เขาพลึง (Khao Phlung)",
+      "value": "khaoPhlung"
+    },
+    {
+      "key": "ห้วยไร่ (Huai Rai)",
+      "value": "huaiRai"
+    },
+    {
+      "key": "ไร่เกล็ดดาว (Rai Kred Dao)",
+      "value": "raiKredDao"
+    },
+    {
+      "key": "แม่พวก (Mae Phuak)",
+      "value": "maePhuak"
+    },
+    {
+      "key": "เด่นชัย (Den Chai)",
+      "value": "denChai"
+    },
+    {
+      "key": "ปากปาน (Pak Pan)",
+      "value": "pakPan"
+    },
+    {
+      "key": "แก่งหลวง (Kaeng Luang)",
+      "value": "kaengLuang"
+    },
+    {
+      "key": "ห้วยแม่ต้า (Huai Mae Ta)",
+      "value": "huaiMaeTa"
+    },
+    {
+      "key": "บ้านปิน (Ban Pin)",
+      "value": "banPin"
+    },
+    {
+      "key": "ผาคัน (Pha Khan)",
+      "value": "phaKhan"
+    },
+    {
+      "key": "ผาคอ (Pha Kho)",
+      "value": "phaKho"
+    },
+    {
+      "key": "ปางป๋วย (Pang Puai)",
+      "value": "pangPuai"
+    },
+    {
+      "key": "แม่จาง (Mae Chang)",
+      "value": "maeChang"
+    },
+    {
+      "key": "แม่เมาะ (Mae Mo)",
+      "value": "maeMo"
+    },
+    {
+      "key": "ห้วยรากไม้ (Huai Rak Mai)",
+      "value": "huaiRakMai"
+    },
+    {
+      "key": "ศาลาผาลาด (Sala Pha Lat)",
+      "value": "salaPhaLat"
+    },
+    {
+      "key": "แม่ทะ (Mae Tha)",
+      "value": "maeTha"
+    },
+    {
+      "key": "หนองวัวเฒ่า (Nong Wua Thao)",
+      "value": "nongWuaThao"
+    },
+    {
+      "key": "นครลำปาง (Nakhon Lampang)",
+      "value": "nakhonLampang"
+    },
+    {
+      "key": "ห้างฉัตร (Hang Chat)",
+      "value": "hangChat"
+    },
+    {
+      "key": "ปางม่วง (Pang Muang)",
+      "value": "pangMuang"
+    },
+    {
+      "key": "ห้วยเรียน (Huai Rian)",
+      "value": "huaiRian"
+    },
+    {
+      "key": "แม่ตานน้อย (Mae Tan Noi)",
+      "value": "maeTanNoi"
+    },
+    {
+      "key": "ขุนตาน (Khun Tan)",
+      "value": "khunTan"
+    },
+    {
+      "key": "ทาชมภู (Tha Chomphu)",
+      "value": "thaChomphu"
+    },
+    {
+      "key": "ศาลาแม่ทา (Sala Mae Tha)",
+      "value": "salaMaeTha"
+    },
+    {
+      "key": "หนองหล่ม (Nong Lom)",
+      "value": "nongLom"
+    },
+    {
+      "key": "ลำพูน (Lam Phun)",
+      "value": "lamPhun"
+    },
+    {
+      "key": "ป่าเส้า (Pa Sao)",
+      "value": "paSao"
+    },
+    {
+      "key": "สารภี (Saraphi)",
+      "value": "saraphi"
+    },
+    {
+      "key": "เชียงใหม่ (Chiang Mai)",
+      "value": "chiangMai"
+    }
+  ]
+}
