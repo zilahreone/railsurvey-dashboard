@@ -4,8 +4,13 @@ import ReactECharts from 'echarts-for-react'
 function BarChart({ data, formatter }) {
   const [option, setOption] = useState({
     title: {
-      show: false,
-      text: 'World Population',
+      show: true,
+      text: 'ลักษณะพื้นที่ที่เกิดความเสียหาย',
+      left: 'center',
+      textStyle: {
+        fontFamily: 'Sarabun',
+        color: 'rgba(0, 0, 0, 1)',
+      }
     },
     tooltip: {
       trigger: 'axis',
@@ -13,7 +18,11 @@ function BarChart({ data, formatter }) {
         type: 'shadow'
       }
     },
-    legend: {},
+    legend: {
+      textStyle: {
+        fontSize: 24
+      }
+    },
     grid: {
       left: '3%',
       right: '4%',
@@ -31,9 +40,15 @@ function BarChart({ data, formatter }) {
     series: [
       {
         type: 'bar',
+        barCategoryGap: '50%',
+        barWidth: 20,
+        barGap: '-100%',
+        label: {
+          show: true
+        },
         data: data.map(v => v.value),
         colorBy: 'data',
-        color: ['#DC742E', '#C00000', '#AFABAB', '#70AD47', '#FFC000', '#4472C4']
+        color: ['#DC742E', '#C00000', '#AFABAB', '#70AD47', '#FFC000', '#4472C4', '#E67A30', '#6E231F', '#5B9BD5']
       }
     ],
   })

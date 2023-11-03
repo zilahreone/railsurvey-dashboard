@@ -5,7 +5,7 @@ import srtLogo from '@images/bg/srt-logo.png'
 function Nav() {
   return (
     <>
-      <nav className="bg-white border-gray-300">
+      <nav className="bg-yellow-500 border-gray-300">
         <div className="flex justify-between items-center px-10">
           <div className='flex gap-1 items-center py-2'>
             <img src={srtLogo} alt="logo" className="h-10" />

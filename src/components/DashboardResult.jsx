@@ -14,7 +14,7 @@ function DashboardResult({ filter, result, formatter }) {
       {
         (!filter.length || filter.includes('situation')) && (
           <div className='basis-1/3 grow border'>
-            <PieDoughnut data={[
+            <PieDoughnut text={'ความเสียหายของราง'} data={[
               { value: result.situation.plain_rail, name: 'รางปกติ' },
               { value: result.situation.rail_end, name: 'ปลายราง' },
               { value: result.situation.crossing, name: 'จุดตัดราง' },
@@ -31,7 +31,7 @@ function DashboardResult({ filter, result, formatter }) {
       {
         (!filter.length || filter.includes('location')) && (
           <div className='basis-1/3 grow border'>
-            <PieDoughnut data={[
+            <PieDoughnut text={'ตำแหน่งที่เกิดความเสียหายของราง'} data={[
               {name: 'หัวราง', value: result.location.rail_head },
               {name: 'เอวราง', value: result.location.rail_web },
               {name: 'ฐานราง', value: result.location.rail_foot },
@@ -45,7 +45,7 @@ function DashboardResult({ filter, result, formatter }) {
       {
         (!filter.length || filter.includes('pattern')) && (
           <div className='basis-1/3 grow border'>
-            <PieDoughnut data={[
+            <PieDoughnut text={'ลักษณะความเสียหายที่เกิดขึ้น'} data={[
               {name: 'แตกหัก', value: result.pattern_nature.fracture },
               {name: 'แตกร้าว', value: result.pattern_nature.crack },
               {name: 'สึกหรอ', value: result.pattern_nature.wear },
@@ -60,14 +60,17 @@ function DashboardResult({ filter, result, formatter }) {
       {
         (!filter.length || filter.includes('areaCondition')) && (
           <div className='basis-1/3 grow border'>
-            <label className="block mb-1 text-md font-semibold text-center">ลักษณะพื้นที่ที่เกิดความเสียหาย</label>
+            {/* <label className="block mb-1 text-md font-semibold text-center">ลักษณะพื้นที่ที่เกิดความเสียหาย</label> */}
             <BarChart data={[
+              { name: 'อื่นๆ', value: result.failure_area.other },
               { name: 'มีน้ำท่วมขัง', value: result.failure_area.flood },
               { name: 'สะพาน', value: result.failure_area.bridge },
               { name: 'บริเวณอุโมงค์', value: result.failure_area.tunnel },
               { name: 'สถานีรถไฟ', value: result.failure_area.station },
-              { name: 'พื้นที่รัสมีโค้ง', value: result.failure_area.curve },
+              { name: 'พื้นที่รัศมีโค้ง', value: result.failure_area.curve },
               { name: 'พื้นที่ลาดชัน', value: result.failure_area.slope },
+              { name: 'ทางหลีก', value: result.failure_area.siding },
+              { name: 'ทางปกติ', value: result.failure_area.main }
             ]} formatter={formatter} />
           </div>
         )

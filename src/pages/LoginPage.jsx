@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import railBg from '@images/bg/rail-bg.jpg'
 import railLogo from '@images/bg/rmt-logo.png'
 import Cookies from 'js-cookie'
+import { redirect, useNavigate } from 'react-router-dom'
+import { useAuth } from '../ProtectedRoutes'
 
 function LoginPage() {
   const [loginForm, setLoginForm] = useState({ user: null, password: null })
   const [isValid, setIsvalid] = useState(true)
   const [shake, setShake] = useState('')
+  const auth = useAuth()
+  const navigate = useNavigate()
+
   const handleLogin = () => {
     if (loginForm.password === import.meta.env.VITE_LOGIN_PASSWORD) {
-      Cookies.set('isAuthenticated')
+      Cookies.set('isAuthenticated', loginForm.user)
+      navigate('/', { replace: true })
+      // redirect('/')
     } else {
-      console.log(loginForm.password)
       setIsvalid(false)
       setShake('animate-shake animate-twice animate-duration-300 animate-delay-0')
       setTimeout(() => {
