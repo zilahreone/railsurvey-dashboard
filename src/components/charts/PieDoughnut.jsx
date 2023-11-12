@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactECharts from 'echarts-for-react'
 
-function PieDoughnut({ data, text }) {
+function PieDoughnut({ data, text, formatter }) {
   const option = {
     title: {
       text: text,
@@ -13,15 +13,22 @@ function PieDoughnut({ data, text }) {
       padding: [5, 0]
     },
     tooltip: {
-      trigger: 'item'
+      // renderMode: "html",
+      trigger: 'item',
+      // className: 'echarts-tooltip echarts-tooltip-dark',
+      formatter: formatter && `{b}: {c} %`
+      // formatter: `<div className='echarts-tooltip echarts-tooltip-dark'>sfsdf</div>`
     },
     legend: {
       orient: 'horizontal',
-      type: 'scroll',
-      top: 'bottom'
-      // right: 0,
+      // orient: 'vertical',
+      // align: 'right',
+      itemWidth: 15,
+      // type: 'scroll',
+      top: 230,
+      // right: 25,
       // left: 0,
-      // bottom: 'left'
+      // bottom: 0
       // itemGap: 15,
     },
     // dataset: {
@@ -31,12 +38,15 @@ function PieDoughnut({ data, text }) {
       {
         // name: 'Access From',
         type: 'pie',
-        radius: ['30%', '80%'],
-        center: ['50%', '50%'],
+        top: 10,
+        bottom: 5,
+        radius: ['30%', '70%'],
+        center: ['50%', '40%'],
+        // center: ['32%', '55%'],
         label: {
           show: true, position: 'inner',
           formatter: function (params) {
-            return params.data.value
+            return formatter ? params.data.value + ' %' : params.data.value
           },
         },
         labelLine: {
@@ -84,7 +94,8 @@ function PieDoughnut({ data, text }) {
   }
   return (
     <>
-      <ReactECharts option={option} />
+      <ReactECharts option={option} style={{minWidth: '300px', maxHeight: '325px', justifyContent: 'center', justifyItems: 'center'}} />
+      {/* <ReactECharts option={option} /> */}
     </>
   )
 }

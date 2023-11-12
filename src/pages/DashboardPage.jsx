@@ -449,6 +449,36 @@ function DashboardPage() {
     }
     setWaitDownload(false)
   }
+  const handlePrint = (event) => {
+    console.log('print');
+    /*Block printing*/
+    window.onbeforeprint = (event) => {
+      // console.log("onbeforeprint function");
+      printDiabled();
+    };
+    window.onafterprint = (event) => {
+      console.log("after");
+      // printDiabled();
+    };
+
+    function printDiabled() {
+      let test = document.createElement('div')
+      
+      // document.body.style.marginTop = '5px'
+      // document.body.style.marginLeft = '10px'
+      // document.body.style.transform = "scale(" + 0.43 + ")"
+      // document.body.style.transformOrigin = '0 0'
+      // document.body.zoom = '70%'
+      // var headstr = `${document.getElementById('print').outerHTML}`
+      var headstr = document.getElementById('print')
+      //var oldstr = document.body.innerHTML;
+      // console.log(headstr);
+      // document.body.innerHTML = headstr;
+      document.body.appendChild(headstr)
+    }
+    window.print()
+    /*Block printing*/
+  }
   // useEffect(() => {
   //   console.log(instance);
   //   if (instance.url) {
@@ -462,13 +492,13 @@ function DashboardPage() {
   //   }
   // }, [instance.url])
   return (
-    <div>
+    <div id='print'>
       {/* {JSON.stringify(filter)} */}
       {/* {JSON.stringify(queryFilter)} */}
       {/* {JSON.stringify(filterData)} */}
-      <div className="flex flex-row gap-2">
-        <div className={`flex flex-col gap-2 basis-full`}>
-          <div className='flex gap-2 items-center'>
+      <div className="flex flex-col xl:flex-row gap-2">
+        <div className={`flex flex-col gap-2 grow`}>
+          <div className='flex gap-2 items-center flex-wrap'>
             <div className='grow'>
               <label className="block mb-1 text-sm font-semibold">วันที่สำรวจ</label>
               <input onChange={handleQueryString} type="date" min="2023-01-01" max={currentDate} id="date-start" name='date-start' className="tw-input" />
@@ -495,7 +525,7 @@ function DashboardPage() {
               {/* <p className="mt-2 text-sm text-red-600 dark:text-red-500"><span className="font-medium">Oops!</span> Username already taken!</p> */}
             </div>
           </div>
-          <div className='flex gap-2 items-center'>
+          <div className='flex flex-wrap gap-2 items-center'>
             <div className='grow'>
               <label className="block mb-1 text-sm font-semibold">แขวง</label>
               <select onChange={handleQueryString} id="zone" name='zone' className="tw-input">
@@ -560,8 +590,8 @@ function DashboardPage() {
               {/* <p className="mt-2 text-sm text-red-600 dark:text-red-500"><span className="font-medium">Oops!</span> Username already taken!</p> */}
             </div>
           </div>
-          <div className='flex gap-2 items-center'>
-            <div className='flex-1'>
+          <div className='flex flex-col sm:flex-row gap-2'>
+            <div className='grow'>
               <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg flex-col dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 {
                   types.map((v, i) => i < 3 &&
@@ -574,7 +604,7 @@ function DashboardPage() {
                 }
               </ul>
             </div>
-            <div className='flex-1'>
+            <div className='grow'>
               <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg flex-col dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 {
                   types.map((v, i) => i > 2 &&
@@ -588,27 +618,27 @@ function DashboardPage() {
               </ul>
             </div>
           </div>
-          <div className='flex flex-wrap gap-8 items-center'>
+          <div className='flex flex-wrap gap-x-8 items-center'>
             <div className='flex gap-4'>
               <label className="block text-sm font-medium">กรณีความเสียหายทั้งหมด</label>
               <label className="block text-sm font-medium">{total}</label>
-              <label className="block text-sm font-medium">วิเคราะห์ผล</label>
             </div>
-            <div className='flex'>
-              <div className="flex items-center pl-4 dark:border-gray-700">
+            <div className='flex flex-row items-center gap-x-4'>
+              <label className="block text-sm font-medium">วิเคราะห์ผล</label>
+              <div className="flex items-center dark:border-gray-700">
                 <input id="bordered-radio-1" onChange={handleShowResult} checked={analys === 'count'} type="radio" value="count" name="bordered-radio" className="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300" />
                 <label htmlFor="bordered-radio-1" className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">จำนวน</label>
               </div>
-              <div className="flex items-center pl-4 dark:border-gray-700">
+              <div className="flex items-center dark:border-gray-700">
                 <input id="bordered-radio-2" onChange={handleShowResult} checked={analys === 'percent'} type="radio" value="percent" name="bordered-radio" className="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300" />
                 <label htmlFor="bordered-radio-2" className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">เปอร์เซ็นต์</label>
               </div>
             </div>
           </div>
-          <div className='flex gap-2 items-center'>
+          <div className='flex gap-0 items-center justify-center'>
             {
               (!filter.length || filter.includes('situation')) && (
-                <div className='basis-1/3 grow border'>
+                <div className='grow border'>
                   <PieDoughnut text={'ความเสียหายของราง'} data={[
                     { value: filterData.situation.plain_rail, name: 'รางปกติ' },
                     { value: filterData.situation.rail_end, name: 'ปลายราง' },
@@ -619,52 +649,48 @@ function DashboardPage() {
                     { value: filterData.situation.turn_out, name: 'ประแจ' },
                     { value: filterData.situation.railroad_crossing, name: 'ทางข้ามราง' },
                     { value: filterData.situation.other, name: 'อื่นๆ' },
-                  ]} />
+                  ]} formatter={formatter} />
                 </div>
               )
             }
             {
               (!filter.length || filter.includes('location')) && (
-                <div className='basis-1/3 grow border'>
+                <div className='grow border'>
                   <PieDoughnut text={'ตำแหน่งที่เกิดความเสียหายของราง'} data={[
-                    {name: 'หัวราง', value: filterData.location.rail_head },
-                    {name: 'เอวราง', value: filterData.location.rail_web },
-                    {name: 'ฐานราง', value: filterData.location.rail_foot },
-                    {name: 'เต็มหน้าตัด', value: filterData.location.full_section },
-                    {name: 'สันราง', value: filterData.location.guade_side },
-                    {name: 'พื้นผิวบนหัวราง', value: filterData.location.surface_of_rail_head },
-                  ]} />
+                    { name: 'หัวราง', value: filterData.location.rail_head },
+                    { name: 'เอวราง', value: filterData.location.rail_web },
+                    { name: 'ฐานราง', value: filterData.location.rail_foot },
+                    { name: 'เต็มหน้าตัด', value: filterData.location.full_section },
+                    { name: 'สันราง', value: filterData.location.guade_side },
+                    { name: 'พื้นผิวบนหัวราง', value: filterData.location.surface_of_rail_head },
+                  ]} formatter={formatter} />
                 </div>
               )
             }
             {
               (!filter.length || filter.includes('pattern')) && (
-                <div className='basis-1/3 grow border'>
+                <div className='grow border'>
                   <PieDoughnut text={'ลักษณะความเสียหายที่เกิดขึ้น'} data={[
-                    {name: 'แตกหัก', value: filterData.pattern_nature.fracture },
-                    {name: 'แตกร้าว', value: filterData.pattern_nature.crack },
-                    {name: 'สึกหรอ', value: filterData.pattern_nature.wear },
-                    {name: 'รางคดงอ', value: filterData.pattern_nature.distorted_rail },
-                    {name: 'เกิดสนิม/กัดกร่อน', value: filterData.pattern_nature.corrosion },
-                    {name: 'เป็นแผล', value: filterData.pattern_nature.surface_defect },
-                    {name: 'อื่นๆ', value: filterData.pattern_nature.other },
-                  ]} />
+                    { name: 'แตกหัก', value: filterData.pattern_nature.fracture },
+                    { name: 'แตกร้าว', value: filterData.pattern_nature.crack },
+                    { name: 'สึกหรอ', value: filterData.pattern_nature.wear },
+                    { name: 'รางคดงอ', value: filterData.pattern_nature.distorted_rail },
+                    { name: 'เกิดสนิม/กัดกร่อน', value: filterData.pattern_nature.corrosion },
+                    { name: 'เป็นแผล', value: filterData.pattern_nature.surface_defect },
+                    { name: 'อื่นๆ', value: filterData.pattern_nature.other },
+                  ]} formatter={formatter} />
                 </div>
               )
             }
           </div>
 
-
-
-
-
         </div>
         {
-          (!filter.length || filter.some(f => ["trackQuality","areaCondition","maintenanceRecord"].includes(f))) && (
+          (!filter.length || filter.some(f => ["trackQuality", "areaCondition", "maintenanceRecord"].includes(f))) && (
             <div className="flex flex-col gap-2 basis-1/3">
               {
                 (!filter.length || filter.includes('areaCondition')) && (
-                  <div className=''>
+                  <div className='grow border'>
                     {/* <label className="block mb-1 text-md font-semibold text-center">ลักษณะพื้นที่ที่เกิดความเสียหาย</label> */}
                     <BarChart data={[
                       { name: 'อื่นๆ', value: filterData.failure_area.other },
@@ -680,77 +706,79 @@ function DashboardPage() {
                   </div>
                 )
               }
-              {
-                (!filter.length || filter.includes('trackQuality')) && (
-                  <div className=''>
-                    <div className="relative overflow-x-auto shadow-md rounded-lg m-2">
-                      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead className="text-md text-gray-900 border bg-[#FFF1C5]">
-                          <tr>
-                            <th scope="col" className="px-6 py-3">
-                              ลักษณะคุณภาพทาง
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                              สมบูรณ์
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                              ไม่สมบูรณ์
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {qty.title.map((v, i) =>
-                            <tr key={i} className="bg-white border hover:bg-gray-50">
-                              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {Object.keys(v).join()}
+              <div className='flex flex-wrap gap-2'>
+                {
+                  (!filter.length || filter.includes('trackQuality')) && (
+                    <div className='grow'>
+                      <div className="relative overflow-x-auto shadow-md rounded-lg m-2">
+                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                          <thead className="text-md text-gray-900 border bg-[#FFF1C5]">
+                            <tr>
+                              <th scope="col" className="px-6 py-3">
+                                ลักษณะคุณภาพทาง
                               </th>
+                              <th scope="col" className="px-6 py-3">
+                                สมบูรณ์
+                              </th>
+                              <th scope="col" className="px-6 py-3">
+                                ไม่สมบูรณ์
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {qty.title.map((v, i) =>
+                              <tr key={i} className="bg-white border hover:bg-gray-50">
+                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  {Object.keys(v).join()}
+                                </th>
+                                <td className="px-6 py-4">
+                                  {filterData.trackQuality[Object.values(v)].perfect}
+                                </td>
+                                <td className="px-6 py-4">
+                                  {filterData.trackQuality[Object.values(v)].imperfect}
+                                </td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )
+                }
+                {
+                  (!filter.length || filter.includes('maintenanceRecord')) && (
+                    <div className='grow'>
+                      <div className="relative overflow-x-auto shadow-md rounded-lg m-2">
+                        <table className="w-full text-sm text-left text-gray-600 border dark:text-gray-400">
+                          <thead className="text-md text-gray-900 border bg-[#FFF1C5]">
+                            <tr>
+                              <th scope="col" colSpan={4} className="px-6 py-3 text-center">
+                                ประวัติการซ่อมบำรุง
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="bg-white border hover:bg-gray-50">
                               <td className="px-6 py-4">
-                                {filterData.trackQuality[Object.values(v)].perfect}
+                                เคย
                               </td>
                               <td className="px-6 py-4">
-                                {filterData.trackQuality[Object.values(v)].imperfect}
+                                {filterData.maintenanceRecord.true}
+                              </td>
+                              <td className="px-6 py-4">
+                                ไม่เคย
+                              </td>
+                              <td className="px-6 py-4">
+                                {filterData.maintenanceRecord.false}
                               </td>
                             </tr>
-                          )}
-                        </tbody>
-                      </table>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                  </div>
-                )
-              }
-              {
-                (!filter.length || filter.includes('maintenanceRecord')) && (
-                  <div className=''>
-                    <div className="relative overflow-x-auto shadow-md rounded-lg m-2">
-                      <table className="w-full text-sm text-left text-gray-600 border dark:text-gray-400">
-                        <thead className="text-md text-gray-900 border bg-[#FFF1C5]">
-                          <tr>
-                            <th scope="col" colSpan={4} className="px-6 py-3 text-center">
-                              ประวัติการซ่อมบำรุง
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="bg-white border hover:bg-gray-50">
-                            <td className="px-6 py-4">
-                              เคย
-                            </td>
-                            <td className="px-6 py-4">
-                              {filterData.maintenanceRecord.true}
-                            </td>
-                            <td className="px-6 py-4">
-                              ไม่เคย
-                            </td>
-                            <td className="px-6 py-4">
-                              {filterData.maintenanceRecord.false}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                )
-              }
+                  )
+                }
+              </div>
             </div>
           )
         }
@@ -759,42 +787,54 @@ function DashboardPage() {
         <DashboardResult filter={filter} result={filterData} formatter={formatter} />
       </div> */}
       <div className='flex flex-col items-end'>
-        {/* <PDFDownloadLink
-        className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2 text-center inline-flex items-center mr-2'
-        document={<Report data={filterData} />} fileName={`somename-${new moment().format('DD-MM-YYYY-Failure Report')}.pdf`}
-      >
-        {({ blob, url, loading, error }) =>
-          loading ? 'Loading document...' : (
-            <div className='flex justify-center items-center'>
+        <div className='flex items-center gap-x-2'>
+          <div>
+            <button onClick={handlePrint} type="button" className="text-white bg-blue-700 hover:bg-blue-800' focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2 text-center inline-flex items-center mr-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
               </svg>
+              Print
+            </button>
+          </div>
+          <div>
+            {/* <PDFDownloadLink
+              className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2 text-center inline-flex items-center mr-2'
+              document={<Report data={filterData} />} fileName={`somename-${new moment().format('DD-MM-YYYY-Failure Report')}.pdf`}
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? 'Loading document...' : (
+                  <div className='flex justify-center items-center'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                    Export PDF
+                  </div>
+                )
+              }
+            </PDFDownloadLink> */}
+            <button onClick={handleDownloadReportPDF} disabled={waitDownload} type="button" className={`text-white  ${waitDownload ? 'bg-blue-400 hover:bg-blue-400' : 'bg-blue-700 hover:bg-blue-800'}  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2 text-center inline-flex items-center mr-2`}>
+              {
+                !waitDownload ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                ) : (
+                  <svg aria-hidden="true" role="status" className="w-6 h-6 mr-2 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB" />
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor" />
+                  </svg>
+                )
+              }
               Export PDF
-            </div>
-          )
-        }
-      </PDFDownloadLink> */}
-        <button onClick={handleDownloadReportPDF} disabled={waitDownload} type="button" className={`text-white  ${waitDownload ? 'bg-blue-400 hover:bg-blue-400' : 'bg-blue-700 hover:bg-blue-800'}  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2 text-center inline-flex items-center mr-2`}>
-          {
-            !waitDownload ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
-            ) : (
-              <svg aria-hidden="true" role="status" className="w-6 h-6 mr-2 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB" />
-                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor" />
-              </svg>
-            )
-          }
-          Export PDF
-        </button>
-        {/* <BlobProvider document={<Report data={filterData} />}>
-      {({ blob, url, loading, error }) => {
-        console.log(url);
-        return <a href={url}>download</a>
-      }}
-    </BlobProvider> */}
+            </button>
+            {/* <BlobProvider document={<Report data={filterData} />}>
+              {({ blob, url, loading, error }) => {
+                console.log(url);
+                return <a href={url}>download</a>
+              }}
+            </BlobProvider> */}
+          </div>
+        </div>
       </div>
     </div>
   )

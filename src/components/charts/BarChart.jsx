@@ -16,7 +16,8 @@ function BarChart({ data, formatter }) {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow'
-      }
+      },
+      // formatter: formatter ? `{b}: {c} %` : null
     },
     legend: {
       textStyle: {
@@ -44,7 +45,7 @@ function BarChart({ data, formatter }) {
         barWidth: 20,
         barGap: '-100%',
         label: {
-          show: true
+          show: true,
         },
         data: data.map(v => v.value),
         colorBy: 'data',
@@ -53,9 +54,13 @@ function BarChart({ data, formatter }) {
     ],
   })
   useEffect(() => {
-    // console.log(data);
+    // console.log(formatter);
     setOption({
       ...option,
+      tooltip: {
+        ...option.tooltip,
+        formatter: formatter && `{b}: {c} %`
+      },
       xAxis: {
         ...option.xAxis,
         axisLabel: {
@@ -69,6 +74,10 @@ function BarChart({ data, formatter }) {
       series: [
         {
           ...option.series[0],
+          label: {
+            ...option.series[0].label,
+          formatter: formatter && '{c} %'
+          },
           data: data.map(v => v.value)
         }
       ]

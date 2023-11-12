@@ -66,3 +66,66 @@
     @apply grow;
   }
 }
+
+/* style sheet for "A4" printing */
+/* @media print and (width: 21cm) and (height: 29.7cm) {
+  @page {
+     margin: 3cm;
+  }
+} */
+
+/* style sheet for "letter" printing */
+/* @media print and (width: 8.5in) and (height: 11in) {
+ @page {
+     margin: 1in;
+ }
+} */
+
+/* A4 Landscape*/
+/* @page {
+ size: A4;
+ margin: 10%;
+ margin: 1mm;
+ transform: scale(0.7);
+ transform-origin: 0 0;
+} */
+
+/* @media print {
+  body {
+      margin-top: 5px;
+      margin-left: 10px;
+      transform: scale(0.7);
+      transform-origin: 0 0;
+  }
+} */
+@media print {
+  @page {
+    margin: 10px;
+    /* margin-left: 0; */
+  }
+  body {
+    /* margin: 1%; */
+    zoom: 70%;
+    /* transform: scale(.7); */
+    /* transform-origin: 0 0; */
+  }
+}
+/* @media print { */
+  /* @page { */
+    /* size: A4; */
+    /* margin: 2mm; */
+    /* transform: scale(0.1); */
+  /* } */
+  /* body {
+    margin: 2mm;
+    transform: scale(.7);
+    transform-origin: 0 0;
+ } */
+
+  /* body { margin: 20mm; } */
+
+  /* .print-header {
+    position: fixed;
+    top: -10mm;
+  } */
+/* } */
