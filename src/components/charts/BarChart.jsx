@@ -85,7 +85,7 @@ function BarChart({ data, formatter }) {
   }, [data, formatter])
   return (
     <>
-      <ReactECharts option={option} />
+      <ReactECharts option={option} style={{width:'100%'}} />
     </>
   )
 }

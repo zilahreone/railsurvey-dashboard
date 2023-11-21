@@ -9,6 +9,8 @@ import Cookies from 'js-cookie'
 import { saveAs } from 'file-saver'
 import BarChart from '../components/charts/BarChart'
 import PieDoughnut from '../components/charts/PieDoughnut'
+import { jsPDF } from 'jspdf'
+import html2canvas from 'html2canvas'
 
 const types = [
   { 'ความเสียหายของราง (Situation)': 'situation' },
@@ -450,34 +452,44 @@ function DashboardPage() {
     setWaitDownload(false)
   }
   const handlePrint = (event) => {
-    console.log('print');
+    // console.log('print');
     /*Block printing*/
-    window.onbeforeprint = (event) => {
-      // console.log("onbeforeprint function");
-      printDiabled();
-    };
-    window.onafterprint = (event) => {
-      console.log("after");
-      // printDiabled();
-    };
+    // window.onbeforeprint = (event) => {
+    //   printDiabled();
+    // };
+    // window.onafterprint = (event) => {
+    // };
 
-    function printDiabled() {
-      let test = document.createElement('div')
-      
-      // document.body.style.marginTop = '5px'
-      // document.body.style.marginLeft = '10px'
-      // document.body.style.transform = "scale(" + 0.43 + ")"
-      // document.body.style.transformOrigin = '0 0'
-      // document.body.zoom = '70%'
-      // var headstr = `${document.getElementById('print').outerHTML}`
-      var headstr = document.getElementById('print')
-      //var oldstr = document.body.innerHTML;
-      // console.log(headstr);
-      // document.body.innerHTML = headstr;
-      document.body.appendChild(headstr)
-    }
-    window.print()
+    // function printDiabled() {
+    // }
+    // window.print()
     /*Block printing*/
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4',
+      putOnlyUsedFonts: true
+    })
+    const report = document.getElementById('print')
+    const temp_style = report.style
+    report.style.paddingTop = '30px'
+    report.style.padding = '40px'
+    report.style.display = 'block'
+    html2canvas(report, {
+      scale: 2,
+      windowWidth: '1270px',
+      // windowHeight: '100px'
+    }).then((canvas) => {
+      // canvas.style.display = 'block'
+      report.style = temp_style
+      const imgData = canvas.toDataURL('image/png')
+      const ratio = doc.internal.pageSize.getWidth() / canvas.width
+      const width = canvas.width * ratio
+      const height = canvas.height * ratio
+      // console.log(imgData);
+      doc.addImage(imgData, 'JPEG', 0, 0, width, height, undefined, 'FAST')
+      window.open(doc.output('bloburl'))
+    })
   }
   // useEffect(() => {
   //   console.log(instance);
@@ -492,16 +504,16 @@ function DashboardPage() {
   //   }
   // }, [instance.url])
   return (
-    <div id='print'>
+    <div>
       {/* {JSON.stringify(filter)} */}
       {/* {JSON.stringify(queryFilter)} */}
       {/* {JSON.stringify(filterData)} */}
-      <div className="flex flex-col xl:flex-row gap-2">
+      <div id='print' className="flex flex-col xl:flex-row gap-2">
         <div className={`flex flex-col gap-2 grow`}>
           <div className='flex gap-2 items-center flex-wrap'>
             <div className='grow'>
               <label className="block mb-1 text-sm font-semibold">วันที่สำรวจ</label>
-              <input onChange={handleQueryString} type="date" min="2023-01-01" max={currentDate} id="date-start" name='date-start' className="tw-input" />
+              <input onChange={handleQueryString} type="date" min="2023-01-01" max={currentDate} id="date-start" name='date-start' className="tw-input" placeholder='ทั้งหมด' />
               {/* <p className="mt-2 text-sm text-red-600 dark:text-red-500"><span className="font-medium">Oops!</span> Username already taken!</p> */}
             </div>
             <div>
