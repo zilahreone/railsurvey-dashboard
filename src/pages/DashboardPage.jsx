@@ -647,54 +647,58 @@ function DashboardPage() {
               </div>
             </div>
           </div>
-          <div className='flex gap-0 items-center justify-center'>
-            {
-              (!filter.length || filter.includes('situation')) && (
-                <div className='grow border'>
-                  <PieDoughnut text={'ความเสียหายของราง'} data={[
-                    { value: filterData.situation.plain_rail, name: 'รางปกติ' },
-                    { value: filterData.situation.rail_end, name: 'ปลายราง' },
-                    { value: filterData.situation.crossing, name: 'จุดตัดราง' },
-                    { value: filterData.situation.welding_repair, name: 'รอยเชื่อมซ่อม' },
-                    { value: filterData.situation.fish_plate, name: 'ประกับราง' },
-                    { value: filterData.situation.welding_joint, name: 'แนวเชื่อมต่อราง' },
-                    { value: filterData.situation.turn_out, name: 'ประแจ' },
-                    { value: filterData.situation.railroad_crossing, name: 'ทางข้ามราง' },
-                    { value: filterData.situation.other, name: 'อื่นๆ' },
-                  ]} formatter={formatter} />
-                </div>
-              )
-            }
-            {
-              (!filter.length || filter.includes('location')) && (
-                <div className='grow border'>
-                  <PieDoughnut text={'ตำแหน่งที่เกิดความเสียหายของราง'} data={[
-                    { name: 'หัวราง', value: filterData.location.rail_head },
-                    { name: 'เอวราง', value: filterData.location.rail_web },
-                    { name: 'ฐานราง', value: filterData.location.rail_foot },
-                    { name: 'เต็มหน้าตัด', value: filterData.location.full_section },
-                    { name: 'สันราง', value: filterData.location.guade_side },
-                    { name: 'พื้นผิวบนหัวราง', value: filterData.location.surface_of_rail_head },
-                  ]} formatter={formatter} />
-                </div>
-              )
-            }
-            {
-              (!filter.length || filter.includes('pattern')) && (
-                <div className='grow border'>
-                  <PieDoughnut text={'ลักษณะความเสียหายที่เกิดขึ้น'} data={[
-                    { name: 'แตกหัก', value: filterData.pattern_nature.fracture },
-                    { name: 'แตกร้าว', value: filterData.pattern_nature.crack },
-                    { name: 'สึกหรอ', value: filterData.pattern_nature.wear },
-                    { name: 'รางคดงอ', value: filterData.pattern_nature.distorted_rail },
-                    { name: 'เกิดสนิม/กัดกร่อน', value: filterData.pattern_nature.corrosion },
-                    { name: 'เป็นแผล', value: filterData.pattern_nature.surface_defect },
-                    { name: 'อื่นๆ', value: filterData.pattern_nature.other },
-                  ]} formatter={formatter} />
-                </div>
-              )
-            }
-          </div>
+          {
+            (!filter.length || filter.some(f => ['pattern', 'location', 'situation'].includes(f))) && (
+              <div className='flex flex-wrap gap-0 items-center justify-center'>
+                {
+                  (!filter.length || filter.includes('situation')) && (
+                    <div className='grow border'>
+                      <PieDoughnut text={'ความเสียหายของราง'} data={[
+                        { value: filterData.situation.plain_rail, name: 'รางปกติ' },
+                        { value: filterData.situation.rail_end, name: 'ปลายราง' },
+                        { value: filterData.situation.crossing, name: 'จุดตัดราง' },
+                        { value: filterData.situation.welding_repair, name: 'รอยเชื่อมซ่อม' },
+                        { value: filterData.situation.fish_plate, name: 'ประกับราง' },
+                        { value: filterData.situation.welding_joint, name: 'แนวเชื่อมต่อราง' },
+                        { value: filterData.situation.turn_out, name: 'ประแจ' },
+                        { value: filterData.situation.railroad_crossing, name: 'ทางข้ามราง' },
+                        { value: filterData.situation.other, name: 'อื่นๆ' },
+                      ]} formatter={formatter} />
+                    </div>
+                  )
+                }
+                {
+                  (!filter.length || filter.includes('location')) && (
+                    <div className='grow border'>
+                      <PieDoughnut text={'ตำแหน่งที่เกิดความเสียหายของราง'} data={[
+                        { name: 'หัวราง', value: filterData.location.rail_head },
+                        { name: 'เอวราง', value: filterData.location.rail_web },
+                        { name: 'ฐานราง', value: filterData.location.rail_foot },
+                        { name: 'เต็มหน้าตัด', value: filterData.location.full_section },
+                        { name: 'สันราง', value: filterData.location.guade_side },
+                        { name: 'พื้นผิวบนหัวราง', value: filterData.location.surface_of_rail_head },
+                      ]} formatter={formatter} />
+                    </div>
+                  )
+                }
+                {
+                  (!filter.length || filter.includes('pattern')) && (
+                    <div className='grow border'>
+                      <PieDoughnut text={'ลักษณะความเสียหายที่เกิดขึ้น'} data={[
+                        { name: 'แตกหัก', value: filterData.pattern_nature.fracture },
+                        { name: 'แตกร้าว', value: filterData.pattern_nature.crack },
+                        { name: 'สึกหรอ', value: filterData.pattern_nature.wear },
+                        { name: 'รางคดงอ', value: filterData.pattern_nature.distorted_rail },
+                        { name: 'เกิดสนิม/กัดกร่อน', value: filterData.pattern_nature.corrosion },
+                        { name: 'เป็นแผล', value: filterData.pattern_nature.surface_defect },
+                        { name: 'อื่นๆ', value: filterData.pattern_nature.other },
+                      ]} formatter={formatter} />
+                    </div>
+                  )
+                }
+              </div>
+            )
+          }
 
         </div>
         {
@@ -702,7 +706,7 @@ function DashboardPage() {
             <div className="flex flex-col gap-2 basis-1/3">
               {
                 (!filter.length || filter.includes('areaCondition')) && (
-                  <div className='grow border'>
+                  <div className='border'>
                     {/* <label className="block mb-1 text-md font-semibold text-center">ลักษณะพื้นที่ที่เกิดความเสียหาย</label> */}
                     <BarChart data={[
                       { name: 'อื่นๆ', value: filterData.failure_area.other },

@@ -14,7 +14,7 @@ function LoginPage() {
 
   const handleLogin = () => {
     if (loginForm.password === import.meta.env.VITE_LOGIN_PASSWORD) {
-      Cookies.set('isAuthenticated', loginForm.user)
+      Cookies.set('isAuthenticated', loginForm.user, { expires: 0.125 })
       navigate('/', { replace: true })
       // redirect('/')
     } else {
