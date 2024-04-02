@@ -7,7 +7,21 @@ import mtecImg from '@images/footer/logo-mtec.png'
 import nectecImg from '@images/footer/logo-nectec.png'
 import font from '@/assets/fonts/THSarabunNew.ttf'
 
-Font.register({ family: 'THSarabunNew', src: font, fontStyle: 'normal', fontWeight: 'normal' })
+Font.register({
+  family: 'THSarabunNew',
+  fonts: [
+    {
+      src: font,
+      fontStyle: 'normal',
+      fontWeight: 'medium'
+    },
+    {
+      src: font,
+      fontStyle: 'normal',
+      fontWeight: 'bold'
+    }
+  ]
+})
 
 const styles = StyleSheet.create({
   page: {
@@ -53,6 +67,8 @@ const styles = StyleSheet.create({
   value: {
     // borderBottom: '1px groove gray',
     borderBottom: '1px solid gray',
+    // height: '17px'
+    // paddingTop: '8px'
     // position: 'absolute',
     // width: '100%',
     // height:'1.1em',
@@ -74,9 +90,10 @@ const styles = StyleSheet.create({
     height: window.innerHeight,
   },
   title: {
+    fontFamily: 'THSarabunNew',
     color: '#C00000',
-    fontWeight: 'heavy',
-    paddingBottom: '2px',
+    fontWeight: 'bold',
+    paddingBottom: '2px'
   },
   table: {
     display: "flex",
@@ -163,7 +180,7 @@ function Report({ data }) {
               <View style={{ ...styles.flexCol, gap: '10px' }}>
 
                 <View style={styles.flexCol}>
-                  <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <View style={{ paddingBottom: '5px', display: 'flex', flexDirection: 'row' }}>
                     <View style={{ display: 'flex', flexDirection: 'row', flexBasis: '50%' }}>
                       <Text>วันที่สำรวจจาก</Text>
                       <View style={{ ...styles.value, display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1 }}>
@@ -177,7 +194,7 @@ function Report({ data }) {
                       </View>
                     </View>
                   </View>
-                  <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <View style={{ paddingBottom: '5px', display: 'flex', flexDirection: 'row' }}>
                     <View style={{ display: 'flex', flexDirection: 'row', flexBasis: '50%' }}>
                       <Text>เขตการเดินรถ</Text>
                       <View style={{ ...styles.value, display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1 }}>
@@ -191,7 +208,7 @@ function Report({ data }) {
                       </View>
                     </View>
                   </View>
-                  <View style={{ display: 'flex', flexDirection: 'row' }}>
+                  <View style={{ paddingBottom: '5px', display: 'flex', flexDirection: 'row' }}>
                     <View style={{ display: 'flex', flexDirection: 'row', flexBasis: '50%' }}>
                       <Text>สถานีจาก</Text>
                       <View style={{ ...styles.value, display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1 }}>
@@ -558,7 +575,7 @@ function Report({ data }) {
                 {/* <View style={[styles.flexRow, { gap: '30px' }]}> */}
                 <View style={[styles.flexRow, { gap: '30px' }]} >
                   <View style={styles.flexCol}>
-                    <Text style={styles.title}>การสำรวจความเสียหายของทาง</Text>
+                    <Text style={{...styles.title}}>การสำรวจความเสียหายของทาง</Text>
                     <View style={styles.table}>
                       <View style={[styles.tableRow]}>
                         <View style={[styles.tableCol, styles.highLight, { width: '50%' }]}>
