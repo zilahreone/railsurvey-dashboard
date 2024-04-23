@@ -6,6 +6,7 @@ import nstdaImg from '@images/footer/logo-nstda.png'
 import mtecImg from '@images/footer/logo-mtec.png'
 import nectecImg from '@images/footer/logo-nectec.png'
 import font from '@/assets/fonts/THSarabunNew.ttf'
+import font_bold from '@/assets/fonts/THSarabunNewBold.ttf'
 
 Font.register({
   family: 'THSarabunNew',
@@ -13,10 +14,10 @@ Font.register({
     {
       src: font,
       fontStyle: 'normal',
-      fontWeight: 'medium'
+      fontWeight: 'normal'
     },
     {
-      src: font,
+      src: font_bold,
       fontStyle: 'normal',
       fontWeight: 'bold'
     }
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
     paddingRight: '4px',
     margin: "auto",
     marginTop: 5,
+    marginLeft: 5,
     fontSize: 13,
     fontWeight: '10px',
   },
@@ -238,7 +240,7 @@ function Report({ data }) {
                   <View style={styles.table}>
                     <View style={styles.tableRow}>
                       <View style={[styles.tableCol, styles.highLight, { width: '100%' }]}>
-                        <Text style={styles.tableCell}>ความรุนแรงของความเสียหาย</Text>
+                        <Text style={{...styles.tableCell, fontWeight: 'bold'}}>ความรุนแรงของความเสียหาย</Text>
                       </View>
                     </View>
                     <View style={styles.tableRow}>
@@ -289,7 +291,7 @@ function Report({ data }) {
                   <View style={styles.table}>
                     <View style={styles.tableRow}>
                       <View style={[styles.tableCol, styles.highLight, { width: '100%' }]}>
-                        <Text style={styles.tableCell}>ลักษณะพื้นที่ที่เกิดความเสียหาย</Text>
+                        <Text style={{...styles.tableCell, fontWeight: 'bold'}}>ลักษณะพื้นที่ที่เกิดความเสียหาย</Text>
                       </View>
                     </View>
                     <View style={styles.tableRow}>
@@ -375,14 +377,14 @@ function Report({ data }) {
                   <Text style={styles.title}>การสำรวจความเสียหายของราง</Text>
                   <View style={styles.table}>
                     <View style={styles.tableRow}>
-                      <View style={[styles.tableCol, styles.center, { width: '34%' }]}>
-                        <Text style={styles.tableCell}>ความเสียหายของราง (Situation)</Text>
+                      <View style={[styles.tableCol, styles.center, { backgroundColor: '#DEEBF7', width: '32%' }]}>
+                        <Text style={{...styles.tableCell, marginLeft: 0, fontWeight: 'bold'}}>ความเสียหายของราง (Situation)</Text>
                       </View>
-                      <View style={[styles.tableCol, styles.center, { width: '33%' }]}>
-                        <Text style={styles.tableCell}>ตำแหน่งที่เกิดความเสียหายของราง (Location)</Text>
+                      <View style={[styles.tableCol, styles.center,  { backgroundColor: '#E7E6E6', width: '33%' }]}>
+                        <Text style={{...styles.tableCell, marginLeft: 0, fontWeight: 'bold'}}>ตำแหน่งที่เกิดความเสียหายของราง (Location)</Text>
                       </View>
-                      <View style={[styles.tableCol, styles.center, styles.highLight, { width: '33%' }]}>
-                        <Text style={styles.tableCell}>ลักษณะความเสียหายที่เกิดขึ้น (Pattern, nature)</Text>
+                      <View style={[styles.tableCol, styles.center, styles.highLight, { width: '35%' }]}>
+                        <Text style={{...styles.tableCell, marginLeft: 0, fontWeight: 'bold'}}>ลักษณะความเสียหายที่เกิดขึ้น (Pattern, nature)</Text>
                       </View>
                     </View>
                     <View style={styles.tableRow}>
@@ -391,7 +393,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>รางปกติ</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.plain_rail }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -403,7 +405,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>แตกหัก</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.fracture }</Text>
                           </View>
                         </View>
@@ -411,7 +413,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>ปลายราง</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.rail_end }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -423,7 +425,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>แตกร้าว</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.crack }</Text>
                           </View>
                         </View>
@@ -431,7 +433,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>จุดตัดราง</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.crossing }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -443,7 +445,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>สึกหรอ</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.wear }</Text>
                           </View>
                         </View>
@@ -451,7 +453,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>รอยเชื่อมซ่อม</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.welding_repair }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -463,7 +465,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>รางคดงอ</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.distorted_rail }</Text>
                           </View>
                         </View>
@@ -471,7 +473,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>ประกับราง</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.fish_plate }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -483,7 +485,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>เกิดสนิม/กัดกร่อน</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.corrosion }</Text>
                           </View>
                         </View>
@@ -491,7 +493,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>แนวเชื่อมต่อราง</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.welding_joint }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -503,7 +505,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>เกิดแผล/เสียรูป</Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}>{ data.pattern_nature.surface_defect }</Text>
                           </View>
                         </View>
@@ -511,7 +513,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>ประแจ</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.turn_out }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -523,7 +525,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
                         </View>
@@ -531,7 +533,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>ทางข้าม</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.railroad_crossing }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -543,7 +545,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
                         </View>
@@ -551,7 +553,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}>อื่นๆ</Text>
                           </View>
-                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '14%' }]}>
+                          <View style={[styles.tableCol, { borderBottomWidth: 0, width: '12%' }]}>
                             <Text style={styles.tableCell}>{ data.situation.other }</Text>
                           </View>
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
@@ -563,7 +565,7 @@ function Report({ data }) {
                           <View style={[styles.tableCol, { borderBottomWidth: 0, borderRightWidth: 0, width: '20%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
-                          <View style={[styles.tableCol, styles.removeBorder, { width: '13%' }]}>
+                          <View style={[styles.tableCol, styles.removeBorder, { width: '15%' }]}>
                             <Text style={styles.tableCell}></Text>
                           </View>
                         </View>
@@ -579,13 +581,13 @@ function Report({ data }) {
                     <View style={styles.table}>
                       <View style={[styles.tableRow]}>
                         <View style={[styles.tableCol, styles.highLight, { width: '50%' }]}>
-                          <Text style={styles.tableCell}>คุณภาพทาง</Text>
+                          <Text style={{...styles.tableCell, fontWeight: 'bold'}}>คุณภาพทาง</Text>
                         </View>
                         <View style={[styles.tableCol, styles.highLight, { width: '25%' }]}>
-                          <Text style={styles.tableCell}>สมบูรณ์</Text>
+                          <Text style={{...styles.tableCell, fontWeight: 'bold'}}>สมบูรณ์</Text>
                         </View>
                         <View style={[styles.tableCol, styles.highLight, { width: '25%' }]}>
-                          <Text style={styles.tableCell}>ไม่สมบูรณ์</Text>
+                          <Text style={{...styles.tableCell, fontWeight: 'bold'}}>ไม่สมบูรณ์</Text>
                         </View>
                       </View>
                       <View style={styles.tableRow}>
