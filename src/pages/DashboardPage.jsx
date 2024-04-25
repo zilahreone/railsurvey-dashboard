@@ -458,8 +458,8 @@ function DashboardPage() {
       format: 'a4',
       putOnlyUsedFonts: true
     })
-    // const report = document.getElementById('print')
-    const report = document.getElementById('root')
+    const report = document.getElementById('print')
+    // const report = document.getElementById('root')
     const temp_style = report.style
     report.style.paddingTop = '30px'
     report.style.padding = '40px'
@@ -471,7 +471,7 @@ function DashboardPage() {
       // windowHeight: '100px'
     }).then((canvas) => {
       // canvas.style.display = 'block'
-      // report.style = temp_style
+      report.style = temp_style
       const imgData = canvas.toDataURL('image/png')
       const ratio = doc.internal.pageSize.getWidth() / canvas.width
       const width = canvas.width * ratio
@@ -630,10 +630,10 @@ function DashboardPage() {
           </div>
           {
             (!filter.length || filter.some(f => ['pattern', 'location', 'situation'].includes(f))) && (
-              <div className='flex flex-wrap gap-0 items-center justify-center'>
+              <div className='flex flex-row flex-wrap items-center justify-center'>
                 {
                   (!filter.length || filter.includes('situation')) && (
-                    <div className='grow border'>
+                    <div className='grow max-w-[33%] min-w-[300px]'>
                       <PieDoughnut text={'ความเสียหายของราง'} data={[
                         { value: filterData.situation.plain_rail, name: 'รางปกติ' },
                         { value: filterData.situation.rail_end, name: 'ปลายราง' },
@@ -650,7 +650,7 @@ function DashboardPage() {
                 }
                 {
                   (!filter.length || filter.includes('location')) && (
-                    <div className='grow border'>
+                    <div className='grow max-w-[33%] min-w-[300px]'>
                       <PieDoughnut text={'ตำแหน่งที่เกิดความเสียหายของราง'} data={[
                         { name: 'หัวราง', value: filterData.location.rail_head },
                         { name: 'เอวราง', value: filterData.location.rail_web },
@@ -664,7 +664,7 @@ function DashboardPage() {
                 }
                 {
                   (!filter.length || filter.includes('pattern')) && (
-                    <div className='grow border'>
+                    <div className='grow max-w-[33%] min-w-[300px]'>
                       <PieDoughnut text={'ลักษณะความเสียหายที่เกิดขึ้น'} data={[
                         { name: 'แตกหัก', value: filterData.pattern_nature.fracture },
                         { name: 'แตกร้าว', value: filterData.pattern_nature.crack },
